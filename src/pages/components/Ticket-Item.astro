@@ -1,0 +1,8 @@
+---
+const { label } = Astro.props;
+---
+<style>
+    .ticker-item{font-family:var(--display);font-size:.58rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,242,236,.28);padding:0 2.5rem;display:flex;align-items:center;gap:2.5rem;flex-shrink:0}
+    .ticker-item b{color:var(--acid)}
+</style>
+<span class="ticker-item">{label}<b>✦</b></span>

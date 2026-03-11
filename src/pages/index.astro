@@ -1,3 +1,8 @@
+---
+import "../styles/global.css"
+import Navigation from "./components/Navigation.astro";
+import Ticker from "./components/Ticker.astro";
+---
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -52,26 +57,6 @@ body.on-dark.cl #cr{border-color:var(--acid)}
 /* ── GRAIN ── */
 #grain{position:fixed;inset:0;pointer-events:none;z-index:8000;opacity:.16;mix-blend-mode:multiply}
 
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:600;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1.6rem 2.5rem;
-  transition:background .35s,padding .3s,border-color .35s;
-  border-bottom:1px solid transparent;
-}
-nav.sc{background:rgba(244,242,236,.94);backdrop-filter:blur(18px);border-bottom-color:rgba(17,17,16,.08);padding:1rem 2.5rem}
-.nav-logo{font-family:var(--display);font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blk);text-decoration:none;display:flex;align-items:center;gap:.5rem}
-.nav-logo-dot{width:8px;height:8px;background:var(--acid);border-radius:50%;flex-shrink:0}
-.nav-avail{display:flex;align-items:center;gap:.5rem;font-family:var(--display);font-size:.55rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);border:1px solid var(--w3);padding:.4rem .9rem}
-.nav-avail-dot{width:6px;height:6px;background:#4CAF50;border-radius:50%;animation:blink 2.2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.nav-r{display:flex;align-items:center;gap:1.5rem}
-.nav-links{display:flex;align-items:center;gap:1.8rem;list-style:none}
-.nav-links a{font-family:var(--display);font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--grey);text-decoration:none;cursor:none;transition:color .2s}
-.nav-links a:hover{color:var(--blk)}
-.nav-cta{font-family:var(--display);font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;background:var(--blk);color:var(--acid);padding:.6rem 1.4rem;text-decoration:none;cursor:none;transition:background .2s}
-.nav-cta:hover{background:var(--blk2)}
 
 /* ── HERO ── */
 .hero{min-height:100svh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;padding-top:5rem}
@@ -139,12 +124,6 @@ nav.sc{background:rgba(244,242,236,.94);backdrop-filter:blur(18px);border-bottom
 .pgrid-label{position:absolute;bottom:.7rem;left:.8rem;font-family:var(--display);font-size:.45rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,242,236,.0);background:rgba(17,17,16,.6);backdrop-filter:blur(6px);padding:.22rem .55rem;transition:color .25s}
 .pgrid-item:hover .pgrid-label{color:rgba(244,242,236,.7)}
 
-/* ── TICKER ── */
-.ticker{background:var(--blk);padding:.7rem 0;overflow:hidden}
-.ticker-track{display:flex;gap:0;animation:ticker 28s linear infinite;white-space:nowrap;width:max-content}
-.ticker-item{font-family:var(--display);font-size:.58rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,242,236,.28);padding:0 2.5rem;display:flex;align-items:center;gap:2.5rem;flex-shrink:0}
-.ticker-item b{color:var(--acid)}
-@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ── SECTION BASE ── */
 .s{padding:8rem 0;border-top:1px solid rgba(17,17,16,.07)}
@@ -399,19 +378,7 @@ footer{background:var(--blk);padding:4rem 0 3rem}
 <div id="cr"></div>
 
 <!-- NAV -->
-<nav id="nav">
-  <a href="/" class="nav-logo"><span class="nav-logo-dot"></span>WebWerkstattWalther</a>
-  <div class="nav-avail"><span class="nav-avail-dot"></span>Verfügbar ab KW 22</div>
-  <div class="nav-r">
-    <ul class="nav-links">
-      <li><a href="#portfolio">Referenzen</a></li>
-      <li><a href="#leistungen">Leistungen</a></li>
-      <li><a href="#preise">Preise</a></li>
-    </ul>
-    <a href="#kontakt" class="nav-cta">Anfragen</a>
-  </div>
-</nav>
-
+<Navigation />
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
@@ -455,23 +422,7 @@ footer{background:var(--blk);padding:4rem 0 3rem}
 </section>
 
 <!-- TICKER -->
-<div class="ticker" data-dark>
-  <div class="ticker-track">
-    <span class="ticker-item">Mehr Anfragen <b>✦</b></span>
-    <span class="ticker-item">Blitzschnell laden <b>✦</b></span>
-    <span class="ticker-item">Galerie die sich selbst pflegt <b>✦</b></span>
-    <span class="ticker-item">Einmalig bezahlen <b>✦</b></span>
-    <span class="ticker-item">Du machst Fotos <b>✦</b></span>
-    <span class="ticker-item">Ich baue die Website <b>✦</b></span>
-    <span class="ticker-item">Mehr Anfragen <b>✦</b></span>
-    <span class="ticker-item">Blitzschnell laden <b>✦</b></span>
-    <span class="ticker-item">Galerie die sich selbst pflegt <b>✦</b></span>
-    <span class="ticker-item">Einmalig bezahlen <b>✦</b></span>
-    <span class="ticker-item">Du machst Fotos <b>✦</b></span>
-    <span class="ticker-item">Ich baue die Website <b>✦</b></span>
-  </div>
-</div>
-
+<Ticker />
 <!-- BENEFITS - premium dark cards -->
 <section class="s benefits" id="benefits">
   <div class="s-in">

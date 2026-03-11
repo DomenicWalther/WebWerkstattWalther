@@ -1,0 +1,22 @@
+---
+const labels = ["Mehr Anfragen", "Blitzschnell laden", "Galerie die sich selbst pflegt", "Einmalig bezahlen", "Du machst Fotos", "Ich baue die Wesite"]
+const double = [...labels, ...labels];
+---
+
+<style>
+        /* ── TICKER ── */
+    .ticker{background:var(--blk);padding:.7rem 0;overflow:hidden}
+    .ticker-track{display:flex;gap:0;animation:ticker 28s linear infinite;white-space:nowrap;width:max-content}
+
+        .ticker-item{font-family:var(--display);font-size:.58rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,242,236,.28);padding:0 2.5rem;display:flex;align-items:center;gap:2.5rem;flex-shrink:0}
+        .ticker-item b{color:var(--acid)}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+</style>
+<div class="ticker" data-dark>
+    <div class="ticker-track">
+        {double.map(label=>(
+                <span class="ticker-item">{label}<b>✦</b></span>
+            )
+        )}
+    </div>
+</div>
