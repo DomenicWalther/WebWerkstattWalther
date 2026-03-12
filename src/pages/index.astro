@@ -2,6 +2,8 @@
 import "../styles/global.css"
 import Navigation from "./components/Navigation.astro";
 import Ticker from "./components/Ticker.astro";
+import Grain from "./components/Grain.astro";
+import WhyMe from "./components/why-me.astro";
 ---
 <!DOCTYPE html>
 <html lang="de">
@@ -54,8 +56,6 @@ body.cl #cd{width:32px;height:32px;opacity:.15}
 body.cl #cr{width:36px;height:36px;opacity:1}
 body.on-dark.cl #cr{border-color:var(--acid)}
 
-/* ── GRAIN ── */
-#grain{position:fixed;inset:0;pointer-events:none;z-index:8000;opacity:.16;mix-blend-mode:multiply}
 
 
 /* ── HERO ── */
@@ -373,11 +373,11 @@ footer{background:var(--blk);padding:4rem 0 3rem}
 </head>
 <body>
 
-<canvas id="grain"></canvas>
 <div id="cd"></div>
 <div id="cr"></div>
 
-<!-- NAV -->
+<Grain />
+
 <Navigation />
 <!-- HERO -->
 <section class="hero">
@@ -728,14 +728,6 @@ footer{background:var(--blk);padding:4rem 0 3rem}
 </footer>
 
 <script>
-/* ── GRAIN ── */
-(function(){
-  const c=document.getElementById('grain'),ctx=c.getContext('2d');
-  let w,h,f=0;
-  function resize(){w=c.width=window.innerWidth;h=c.height=window.innerHeight}
-  function draw(){f++;if(f%3!==0){requestAnimationFrame(draw);return}const img=ctx.createImageData(w,h),d=img.data;for(let i=0;i<d.length;i+=4){const v=Math.random()*255|0;d[i]=d[i+1]=d[i+2]=v;d[i+3]=11;}ctx.putImageData(img,0,0);requestAnimationFrame(draw)}
-  window.addEventListener('resize',resize);resize();draw();
-})();
 
 /* ── CURSOR ── */
 const cd=document.getElementById('cd'),cr=document.getElementById('cr');
