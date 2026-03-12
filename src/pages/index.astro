@@ -293,12 +293,8 @@ body.on-dark.cl #cr{border-color:var(--acid)}
 .accord-list li::before{content:'→';color:var(--blk);opacity:.4}
 
 /* ── WHY ── */
-.why{background:var(--w2);position:relative}
 .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
-.why-left{padding-right:4rem;border-right:1px solid rgba(17,17,16,.07)}
-.why-right{padding-left:4rem}
 .why-h{font-family:var(--display);font-size:clamp(2.2rem,4vw,3.8rem);font-weight:800;text-transform:uppercase;letter-spacing:-.03em;line-height:.93;margin-bottom:1.8rem}
-.why-h em{font-family:var(--italic);font-style:italic;text-transform:none;font-weight:400;font-size:.85em;color:var(--grey);display:block}
 .why-intro{font-size:.95rem;font-weight:300;line-height:1.85;color:var(--grey);margin-bottom:3rem}
 .why-pt{padding:1.4rem 0;border-top:1px solid rgba(17,17,16,.07);display:grid;grid-template-columns:32px 1fr;gap:1rem;align-items:start}
 .why-pt:last-child{border-bottom:1px solid rgba(17,17,16,.07)}
@@ -640,30 +636,8 @@ footer{background:var(--blk);padding:4rem 0 3rem}
 </section>
 
 <!-- WHY -->
-<section class="s why" id="warum">
-  <div class="s-in">
-    <div class="why-grid">
-      <div class="why-left rv">
-        <div class="s-tag">Warum ich</div>
-        <h2 class="why-h">Ich bin selbst<br><em>Fotograf.</em></h2>
-        <p class="why-intro">Ich weiß wie es sich anfühlt eine Website zu haben die nicht zeigt was man wirklich kann. Ich kenne die Branche — und ich baue Websites die das verstehen.</p>
-        <div>
-          <div class="why-pt"><div class="why-pt-n">01</div><div><div class="why-pt-title">Kein Erklärungsaufwand</div><p class="why-pt-text">Du musst mir nicht erklären was ein Shooting ist oder warum Galerien wichtig sind. Ich weiß das bereits.</p></div></div>
-          <div class="why-pt"><div class="why-pt-n">02</div><div><div class="why-pt-title">Deine Website gehört dir</div><p class="why-pt-text">Kein Lock-in. Echter Code den du jederzeit mitnehmen, anpassen oder weiterentwickeln kannst.</p></div></div>
-          <div class="why-pt"><div class="why-pt-n">03</div><div><div class="why-pt-title">Einmal zahlen, fertig</div><p class="why-pt-text">Keine monatlichen Abokosten. Einmalige Investition, danach minimale laufende Kosten.</p></div></div>
-        </div>
-      </div>
-      <div class="why-right rv d2">
-        <div class="why-metrics">
-          <div class="why-metric"><div class="why-metric-n" data-count="100">0</div><div class="why-metric-label"><strong>PageSpeed Score</strong> — was meine Sites regelmäßig in Google Lighthouse erreichen.</div></div>
-          <div class="why-metric"><div class="why-metric-n">&lt;1<span class="unit">s</span></div><div class="why-metric-label"><strong>Ladezeit</strong> — kein unnötiger Ballast, nur das was gebraucht wird.</div></div>
-          <div class="why-metric"><div class="why-metric-n">∞</div><div class="why-metric-label"><strong>Galerie-Kategorien</strong> — ohne Mehrkosten. Einmal eingerichtet, unbegrenzt skalierbar.</div></div>
-          <div class="why-metric"><div class="why-metric-n">2–4<span class="unit">Wo</span></div><div class="why-metric-label"><strong>Bis zum Launch</strong> — von der ersten Anfrage bis die Website live ist.</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
+<WhyMe />
 
 <!-- PRICING -->
 <section class="s pricing" id="preise" data-dark>
