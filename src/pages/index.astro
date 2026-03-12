@@ -4,6 +4,7 @@ import Navigation from "./components/Navigation.astro";
 import Ticker from "./components/Ticker.astro";
 import Grain from "./components/Grain.astro";
 import WhyMe from "./components/why-me.astro";
+import Footer from "./components/Footer.astro";
 ---
 <!DOCTYPE html>
 <html lang="de">
@@ -344,19 +345,6 @@ body.on-dark.cl #cr{border-color:var(--acid)}
 .cta-h em{font-family:var(--italic);font-style:italic;text-transform:none;font-weight:400;font-size:.68em;letter-spacing:-.01em;color:var(--grey);display:block;margin-top:.15em}
 .cta-acts{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
 
-/* ── FOOTER ── */
-footer{background:var(--blk);padding:4rem 0 3rem}
-.f-inner{max-width:1280px;margin:0 auto;padding:0 2.5rem}
-.f-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(244,242,236,.06)}
-.f-logo{font-family:var(--display);font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--w);text-decoration:none;display:flex;align-items:center;gap:.5rem;margin-bottom:.8rem}
-.f-logo-dot{width:8px;height:8px;background:var(--acid);border-radius:50%}
-.f-desc{font-size:.82rem;font-weight:300;color:rgba(244,242,236,.28);line-height:1.75;max-width:260px}
-.f-ct{font-family:var(--display);font-size:.5rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:rgba(244,242,236,.18);margin-bottom:1rem}
-.f-lk{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-.f-lk a{font-size:.82rem;font-weight:300;color:rgba(244,242,236,.38);text-decoration:none;cursor:none;transition:color .2s}
-.f-lk a:hover{color:var(--acid)}
-.f-bot{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;flex-wrap:wrap;gap:1rem}
-.f-copy{font-family:var(--display);font-size:.5rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,242,236,.16)}
 
 /* ── REVEAL ── */
 .rv{opacity:0;transform:translateY(20px);transition:opacity .65s,transform .65s}
@@ -684,22 +672,7 @@ footer{background:var(--blk);padding:4rem 0 3rem}
 </section>
 
 <!-- FOOTER -->
-<footer data-dark>
-  <div class="f-inner">
-    <div class="f-grid">
-      <div>
-        <a href="/" class="f-logo"><span class="f-logo-dot"></span>WebWerkstattWalther</a>
-        <p class="f-desc">Websites für Fotografen. Damit deine Arbeit den ersten Eindruck macht den sie verdient.</p>
-      </div>
-      <div><p class="f-ct">Navigation</p><ul class="f-lk"><li><a href="#portfolio">Referenzen</a></li><li><a href="#leistungen">Leistungen</a></li><li><a href="#preise">Preise</a></li><li><a href="#kontakt">Kontakt</a></li></ul></div>
-      <div><p class="f-ct">Legal</p><ul class="f-lk"><li><a href="/datenschutz">Datenschutz</a></li><li><a href="/impressum">Impressum</a></li></ul></div>
-    </div>
-    <div class="f-bot">
-      <span class="f-copy">© <span id="yr"></span> WebWerkstattWalther</span>
-      <span class="f-copy">Gebaut mit Astro & Cloudflare</span>
-    </div>
-  </div>
-</footer>
+<Footer />
 
 <script>
 
@@ -744,7 +717,6 @@ function countUp(el,target){let s=null;(function step(ts){if(!s)s=ts;const p=Mat
 const cobs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){countUp(e.target,parseInt(e.target.dataset.count));cobs.unobserve(e.target)}})},{threshold:.5});
 document.querySelectorAll('[data-count]').forEach(el=>cobs.observe(el));
 
-document.getElementById('yr').textContent=new Date().getFullYear();
 </script>
 </body>
 </html>

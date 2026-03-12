@@ -1,0 +1,68 @@
+---
+const navigation = [{
+    label: "Referenzen", href: "#portfolio"
+}, {
+    label: "Leistungen", href: "#leistungen"
+}, {
+    label: "Preise", href: "#preise"
+}, {
+    label: "Kontakt", href: "#kontakt"
+}];
+const legal = [{
+    label: "Datenschutz", href: "/datenschutz"
+}, { label: "Impressum", href: "/impressum"
+}]
+const year = new Date().getFullYear();
+---
+<footer class="bg-black pt-16 pb-12">
+    <div class="max-w-7xl mx-auto px-10">
+
+        <div class="grid grid-cols-[1.5fr_1fr_1fr] gap-12 pb-12 border-b border-white/[.06]">
+
+            <div>
+                <a href="/"
+                   class="font-display text-xs font-extrabold tracking-widest uppercase text-white no-underline flex items-center gap-2 mb-3">
+                    <span class="w-2 h-2 bg-acid rounded-full"></span>
+                    WebWerkstattWalther
+                </a>
+                <p class="text-sm font-light text-white/30 leading-7 max-w-[260px]">
+                    Websites für Fotografen. Damit deine Arbeit den ersten Eindruck macht den sie verdient.
+                </p>
+            </div>
+
+            <div>
+                <p class="font-display text-[.5rem] font-bold tracking-[.25em] uppercase text-white/20 mb-4">
+                    Navigation</p>
+                <ul class="flex flex-col gap-2 list-none">
+                    { navigation.map(item => (
+                            <li><a href={item.href}
+                                   class="text-sm font-light text-white/40 no-underline transition-colors duration-200 hover:text-acid">{item.label}</a>
+                            </li>
+                    ))}
+                </ul>
+            </div>
+
+            <div>
+                <p class="font-display text-[.5rem] font-bold tracking-[.25em] uppercase text-white/20 mb-4">Legal</p>
+                <ul class="flex flex-col gap-2 list-none">
+                    { legal.map(item => (
+                            <li><a href={item.href}
+                                   class="text-sm font-light text-white/40 no-underline transition-colors duration-200 hover:text-acid">{item.label}</a>
+                            </li>
+                    ))}
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="flex justify-between items-center pt-8 flex-wrap gap-4">
+            <span class="font-display text-[.5rem] font-semibold tracking-[.2em] uppercase text-white/20">
+                © {year}  WebWerkstattWalther
+            </span>
+            <span class="font-display text-[.5rem] font-semibold tracking-[.2em] uppercase text-white/20">
+                Gebaut mit Astro & Cloudflare
+            </span>
+        </div>
+
+    </div>
+</footer>
