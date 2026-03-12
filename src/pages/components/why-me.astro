@@ -1,89 +1,81 @@
 ---
 import WhyMePoint from "./why-me-point.astro";
-
-
+import WhyMeBenefits from "./why-me-benefits.astro";
 ---
 <section class="py-32 bg-w2 border-t border-black/[.07] relative" id="warum">
-  <div class="max-w-7xl mx-auto px-10">
-    <div class="grid grid-cols-2">
+    <div class="max-w-7xl mx-auto px-10">
+        <div class="grid grid-cols-2">
 
-      <!-- ── LEFT COLUMN ── -->
-      <div class="pr-16 border-r border-black/[.07] rv">
+            <div class="pr-16 border-r border-black/[.07] rv">
 
-        <!-- s-tag -->
-        <div class="flex items-center gap-3 mb-5 font-display text-[0.6rem] font-bold tracking-[.28em] uppercase text-grey">
-          <span class="w-6 h-px bg-acid shrink-0"></span>
-          Warum ich
-        </div>
+                <div class="flex items-center gap-3 mb-5 font-display text-[0.6rem] font-bold tracking-[.28em] uppercase text-grey">
+                    <span class="w-6 h-px bg-acid shrink-0"></span>
+                    Warum ich
+                </div>
 
-        <!-- Heading -->
-        <h2 class="font-display text-[clamp(2.2rem,4vw,3.8rem)] font-extrabold uppercase tracking-[-0.03em] leading-[.93] mb-7">
-          Ich bin selbst<br>
-          <em class="font-italic font-normal text-[.82em] text-grey block mt-1">Fotograf.</em>
-        </h2>
+                <h2 class="font-display text-[clamp(2.2rem,4vw,3.8rem)] font-extrabold uppercase tracking-[-0.03em] leading-[.93] mb-7">
+                    Ich bin selbst<br>
+                    <em class="font-italic font-normal text-[.82em] text-grey block mt-1">Fotograf.</em>
+                </h2>
 
-        <!-- Intro -->
-        <p class="text-base font-light leading-[1.85] text-grey mb-12">
-          Ich weiß wie es sich anfühlt eine Website zu haben die nicht zeigt was man wirklich kann.
-          Ich kenne die Branche — und ich baue Websites die das verstehen.
-        </p>
+                <p class="text-base font-light leading-[1.85] text-grey mb-12">
+                    Ich weiß wie es sich anfühlt eine Website zu haben die nicht zeigt was man wirklich kann.
+                    Ich kenne die Branche — und ich baue Websites die das verstehen.
+                </p>
 
-        <!-- Points -->
-        <div>
-            <WhyMePoint index="01" label="Kein Erklärungsaufwand" description="Du musst mir nicht erklären was ein Shooting ist oder warum Galerien wichtig sind. Ich weiß das bereits." />
-            <WhyMePoint index="02" label="Deine Website gehört dir" description="Kein Lock-in. Echter Code den du jederzeit mitnehmen, anpassen oder weiterentwickeln kannst." />
-            <WhyMePoint index="03" label="Einmal zahlen, fertig" description="Keine monatlichen Abokosten. Einmalige Investition, danach minimale laufende Kosten." />
-        </div>
-      </div>
-
-      <!-- ── RIGHT COLUMN ── -->
-      <div class="pl-16 rv d2">
-        <div class="flex flex-col">
-
-          <div class="py-9 border-t border-black/[.07]">
-            <div
-              class="font-display text-[clamp(3rem,7vw,5.5rem)] font-extrabold tracking-[-0.04em] leading-none text-blk mb-1.5"
-              data-count="100"
-            >0</div>
-            <div class="text-[0.83rem] font-light leading-[1.6] text-grey">
-              <strong class="text-blk font-medium">PageSpeed Score</strong>
-              — was meine Sites regelmäßig in Google Lighthouse erreichen.
+                <div>
+                    <WhyMePoint index="01" label="Kein Erklärungsaufwand"
+                                description="Du musst mir nicht erklären was ein Shooting ist oder warum Galerien wichtig sind. Ich weiß das bereits."/>
+                    <WhyMePoint index="02" label="Deine Website gehört dir"
+                                description="Kein Lock-in. Echter Code den du jederzeit mitnehmen, anpassen oder weiterentwickeln kannst."/>
+                    <WhyMePoint index="03" label="Einmal zahlen, fertig"
+                                description="Keine monatlichen Abokosten. Einmalige Investition, danach minimale laufende Kosten."/>
+                </div>
             </div>
-          </div>
 
-          <div class="py-9 border-t border-black/[.07]">
-            <div class="font-display text-[clamp(3rem,7vw,5.5rem)] font-extrabold tracking-[-0.04em] leading-none text-blk mb-1.5">
-              &lt;1<span class="text-[0.4em] font-normal text-grey">s</span>
-            </div>
-            <div class="text-[0.83rem] font-light leading-[1.6] text-grey">
-              <strong class="text-blk font-medium">Ladezeit</strong>
-              — kein unnötiger Ballast, nur das was gebraucht wird.
-            </div>
-          </div>
+            <div class="pl-16 rv d2">
+                <div class="flex flex-col">
 
-          <div class="py-9 border-t border-black/[.07]">
-            <div class="font-display text-[clamp(3rem,7vw,5.5rem)] font-extrabold tracking-[-0.04em] leading-none text-blk mb-1.5">
-              ∞
-            </div>
-            <div class="text-[0.83rem] font-light leading-[1.6] text-grey">
-              <strong class="text-blk font-medium">Galerie-Kategorien</strong>
-              — ohne Mehrkosten. Einmal eingerichtet, unbegrenzt skalierbar.
-            </div>
-          </div>
+                    <WhyMeBenefits>
+                        <div slot="label">
+                            100
+                        </div>
+                        <div slot="description">
+                            <strong class="text-blk font-medium">PageSpeed Score</strong>
+                            — was meine Sites regelmäßig in Google Lighthouse erreichen.
+                        </div>
+                    </WhyMeBenefits>
 
-          <div class="py-9 border-t border-b border-black/[.07]">
-            <div class="font-display text-[clamp(3rem,7vw,5.5rem)] font-extrabold tracking-[-0.04em] leading-none text-blk mb-1.5">
-              2–4<span class="text-[0.4em] font-normal text-grey">Wo</span>
+                    <WhyMeBenefits>
+                        <div slot="label">&lt;1<span class="text-[0.4em] font-normal text-grey">s</span></div>
+                        <div slot="description">
+                            <strong class="text-blk font-medium">Ladezeit</strong>
+                            — kein unnötiger Ballast, nur das was gebraucht wird.
+                        </div>
+                    </WhyMeBenefits>
+
+                    <WhyMeBenefits>
+                        <div slot="label">
+                            ∞
+                        </div>
+                        <div slot="description">
+                            <strong class="text-blk font-medium">Galerie-Kategorien</strong>
+                            — ohne Mehrkosten. Einmal eingerichtet, unbegrenzt skalierbar.
+                        </div>
+                    </WhyMeBenefits>
+                    <WhyMeBenefits>
+                        <div slot="label">
+                            2–4<span class="text-[0.4em] font-normal text-grey">Wo</span>
+                        </div>
+                        <div slot="description">
+                            <strong class="text-blk font-medium">Bis zum Launch</strong>
+                            — von der ersten Anfrage bis die Website live ist.
+                        </div>
+                    </WhyMeBenefits>
+
+                </div>
             </div>
-            <div class="text-[0.83rem] font-light leading-[1.6] text-grey">
-              <strong class="text-blk font-medium">Bis zum Launch</strong>
-              — von der ersten Anfrage bis die Website live ist.
-            </div>
-          </div>
 
         </div>
-      </div>
-
     </div>
-  </div>
 </section>
