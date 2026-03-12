@@ -4,4 +4,17 @@
     --font-display: 'Syne',sans-serif;
     --font-italic:'Playfair Display',Georgia,serif;
     --font-body:'DM Sans',system-ui,sans-serif;
+
+
+    --color-w:#F4F2EC;
+    --color-w2:#E8E4DB;
+    --color-w3:#D0CCC2;
+
+    --color-blk:#111110;
+    --color-blk2:#1C1C1A;
+
+    --color-grey:#888580;
+    --color-acid:#CAFF00;
+    --color-acid2:#B8EE00;
+
 }
