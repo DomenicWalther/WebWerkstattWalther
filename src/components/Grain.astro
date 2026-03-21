@@ -6,7 +6,7 @@
     (function () {
         const c = document.getElementById('grain');
         const ctx = c.getContext('2d');
-        let w, h, f = 0;
+        let w, h;
 
         function resize() {
             w = c.width = window.innerWidth;
@@ -14,19 +14,17 @@
         }
 
         function draw() {
-            f++;
-            if (f % 3 !== 0) {
-                requestAnimationFrame(draw);
-                return
-            }
             const img = ctx.createImageData(w, h), d = img.data;
             for (let i = 0; i < d.length; i += 4) {
                 const v = Math.random() * 255 | 0;
                 d[i] = d[i + 1] = d[i + 2] = v;
                 d[i + 3] = 11;
             }
+
             ctx.putImageData(img, 0, 0);
+
             requestAnimationFrame(draw)
+
         }
 
         window.addEventListener('resize', resize);

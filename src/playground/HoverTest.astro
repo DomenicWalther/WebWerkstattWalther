@@ -1,0 +1,13 @@
+---
+import {Image} from "astro:assets";
+import DomenicNormal from "../assets/Domenic-Normal.webp";
+import DomenicSchalke from "../assets/Domenic-Schalke.jpg";
+import LiquidReveal from "./LiquidReveal.astro";
+---
+<LiquidReveal
+    baseImage={DomenicNormal.src}
+    revealImage={DomenicSchalke.src}
+    width={400}
+    height={400}
+    alt="Domenic"
+    />

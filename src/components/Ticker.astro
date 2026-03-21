@@ -1,0 +1,13 @@
+---
+const labels = ["Mehr Anfragen", "Blitzschnell laden", "Galerie die sich selbst pflegt", "Einmalig bezahlen", "Du machst Fotos", "Ich baue die Wesite"]
+const double = [...labels, ...labels];
+---
+
+<div class="overflow-hidden bg-blk py-[0.7rem]" data-dark>
+    <div class="flex w-max animate-[ticker_28s_linear_infinite] whitespace-nowrap">
+        {double.map(label=>(
+                <span class="flex shrink-0 items-center gap-10 px-10 font-display text-[.58rem] font-bold uppercase tracking-[.22em] text-w/30">{label}<b class="text-acid">✦</b></span>
+            )
+        )}
+    </div>
+</div>

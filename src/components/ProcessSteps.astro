@@ -1,0 +1,319 @@
+---
+/**
+ * ProcessSteps.astro
+ *
+ * Props
+ * -----
+ * badge?      string   – small pill label above the heading
+ * heading?    string   – section heading (\n becomes <br>)
+ * steps       Step[]
+ *
+ * Step
+ * ----
+ * {
+ *   number:       number | string   – "01", "02", …
+ *   icon:         string            – inline SVG string
+ *   title:        string
+ *   description:  string            – supports basic HTML
+ *   image:        string            – path / URL to screenshot
+ *   imageAlt?:    string
+ *   active?:      boolean           – pre-activates the card on load
+ * }
+ */
+
+export interface Step {
+  number:      number | string;
+  icon:        string;
+  title:       string;
+  description: string;
+  image:       string;
+  imageAlt?:   string;
+  active?:     boolean;
+}
+
+interface Props {
+  badge?:   string;
+  heading?: string;
+  steps:    Step[];
+}
+
+const {
+  badge   = "Smooth & efficient process",
+  heading = "An Example Squarespace\nWeb Design Project",
+  steps,
+} = Astro.props;
+---
+
+<!-- DM Sans matches the original's clean, modern weight-300 sans-serif -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+  rel="stylesheet"
+/>
+
+<section class="ps-section">
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  {badge && (
+    <div class="ps-badge">
+      <span class="ps-badge__dot" aria-hidden="true"></span>
+      {badge}
+    </div>
+  )}
+
+  <h2 class="ps-heading" set:html={heading.replace(/\n/g, "<br/>")} />
+
+  <!-- ── Cards ──────────────────────────────────────────────── -->
+  <div class="ps-grid">
+    {steps.map((step) => (
+      <article class:list={["ps-card", { "ps-card--active": step.active }]}>
+
+        <!-- large watermark number — LEFT side -->
+        <span class="ps-card__number" aria-hidden="true">{step.number}</span>
+
+        <!-- content layer sits above the number -->
+        <div class="ps-card__content">
+          <div class="ps-card__icon" set:html={step.icon} />
+          <h3 class="ps-card__title">{step.title}</h3>
+          <p class="ps-card__desc" set:html={step.description} />
+        </div>
+
+        <!-- screenshot — positioned bottom-right, never recoloured -->
+        <div class="ps-card__img-wrap">
+          <img
+            src={step.image}
+            alt={step.imageAlt ?? step.title}
+            class="ps-card__img"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  /* ── Tokens ────────────────────────────────────────────────── */
+  :root {
+    --ps-active-bg:   #546f89;
+    --ps-card-bg:     #ffffff;
+    --ps-card-border: #e3e6ea;
+    --ps-text-dark:   #18202e;
+    --ps-text-body:   #40495a;
+    --ps-badge-bg:    #eef0f3;
+    --ps-radius:      18px;
+    --ps-transition:  0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    --ps-font:        "DM Sans", system-ui, sans-serif;
+    --ps-card-height: 520px;
+  }
+
+  /* ── Section ───────────────────────────────────────────────── */
+  .ps-section {
+    padding: 3.5rem 2rem 5rem;
+    max-width: 1300px;
+    margin-inline: auto;
+    font-family: var(--ps-font);
+  }
+
+  /* ── Badge ─────────────────────────────────────────────────── */
+  .ps-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: var(--ps-badge-bg);
+    border-radius: 999px;
+    padding: 0.28rem 0.85rem 0.28rem 0.6rem;
+    font-size: 0.775rem;
+    font-weight: 400;
+    color: var(--ps-text-body);
+    margin-bottom: 1.1rem;
+  }
+  .ps-badge__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #7a8799;
+    flex-shrink: 0;
+  }
+
+  /* ── Section heading ───────────────────────────────────────── */
+  .ps-heading {
+    font-family: var(--ps-font);
+    font-size: clamp(2rem, 3.8vw, 3rem);
+    font-weight: 300;
+    line-height: 1.18;
+    color: var(--ps-text-dark);
+    margin: 0 0 2.8rem;
+    letter-spacing: -0.02em;
+  }
+
+  /* ── Grid ──────────────────────────────────────────────────── */
+  .ps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.1rem;
+    align-items: stretch;
+  }
+
+  /* ── Card ──────────────────────────────────────────────────── */
+  .ps-card {
+    position: relative;
+    min-height: var(--ps-card-height);
+    background: var(--ps-card-bg);
+    border: 1px solid var(--ps-card-border);
+    border-radius: var(--ps-radius);
+    overflow: hidden;
+    padding: 2rem 1.8rem 0 1.8rem;
+    cursor: default;
+    transition:
+      background var(--ps-transition),
+      border-color var(--ps-transition),
+      box-shadow var(--ps-transition);
+  }
+
+  .ps-card:hover,
+  .ps-card--active {
+    background: var(--ps-active-bg);
+    border-color: transparent;
+    box-shadow: 0 16px 48px rgba(60, 88, 112, 0.3);
+  }
+
+  /* ── Watermark number — LEFT ───────────────────────────────── */
+  .ps-card__number {
+    position: absolute;
+    top: -0.6rem;
+    left: 0.9rem;
+    font-family: var(--ps-font);
+    font-size: 9rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: rgba(0, 0, 0, 0.055);
+    pointer-events: none;
+    user-select: none;
+    transition: color var(--ps-transition);
+  }
+
+  .ps-card:hover .ps-card__number,
+  .ps-card--active .ps-card__number {
+    color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* ── Content (above watermark) ─────────────────────────────── */
+  .ps-card__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Icon ──────────────────────────────────────────────────── */
+  .ps-card__icon {
+    width: 26px;
+    height: 26px;
+    margin-bottom: 1.6rem;
+    color: var(--ps-text-dark);
+    transition: color var(--ps-transition);
+  }
+  .ps-card__icon :global(svg) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .ps-card:hover .ps-card__icon,
+  .ps-card--active .ps-card__icon {
+    color: #fff;
+  }
+
+  /* ── Title — gradient-fade on hover/active ─────────────────── */
+  /*
+   * Technique: use background-clip:text so we can apply a vertical
+   * linear-gradient. On rest state it's a solid colour gradient (invisible
+   * effect). On hover/active it fades from solid white → 38% white so the
+   * lower lines of a multi-line title visually "ghost out" — matching the
+   * original design exactly.
+   */
+  .ps-card__title {
+    font-family: var(--ps-font);
+    font-size: clamp(1.4rem, 2.1vw, 1.75rem);
+    font-weight: 300;
+    line-height: 1.22;
+    letter-spacing: -0.02em;
+    margin: 0 0 1rem;
+    background-image: linear-gradient(
+      180deg,
+      var(--ps-text-dark) 0%,
+      var(--ps-text-dark) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background-image var(--ps-transition);
+  }
+
+  .ps-card:hover .ps-card__title,
+  .ps-card--active .ps-card__title {
+    background-image: linear-gradient(
+      180deg,
+      #ffffff  0%,
+      #ffffff  50%,
+      rgba(255, 255, 255, 0.38) 100%
+    );
+  }
+
+  /* ── Description ───────────────────────────────────────────── */
+  .ps-card__desc {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.68;
+    color: var(--ps-text-body);
+    margin: 0;
+    max-width: 88%;
+    transition: color var(--ps-transition);
+  }
+  .ps-card__desc :global(a) {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .ps-card:hover .ps-card__desc,
+  .ps-card--active .ps-card__desc {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  /* ── Screenshot — absolute bottom-right ────────────────────── */
+  /*
+   * The image is intentionally NOT full-width.
+   * It bleeds off the right and bottom edges of the card,
+   * with a rounded top-left corner only.
+   * No filter is ever applied — even on hover.
+   */
+  .ps-card__img-wrap {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 78%;
+    border-radius: 12px 0 0 0;
+    overflow: hidden;
+    box-shadow: -4px -6px 28px rgba(0, 0, 0, 0.12);
+  }
+
+  .ps-card__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    /* ✦ NO filter on hover — image colours are preserved */
+  }
+
+  /* ── Responsive ────────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .ps-grid {
+      grid-template-columns: 1fr;
+      --ps-card-height: 400px;
+    }
+  }
+  @media (max-width: 640px) {
+    .ps-section { padding-inline: 1.25rem; }
+    .ps-card__img-wrap { width: 85%; }
+  }
+</style>

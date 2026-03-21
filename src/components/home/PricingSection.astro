@@ -1,0 +1,73 @@
+---
+const plans = [
+  {
+    tier: "Starter",
+    name: "One-Pager",
+    price: "499",
+    suffix: "EUR",
+    sub: "einmalig · ~0EUR/Monat Hosting",
+    features: ["Einzelne Landing Page", "Kontaktformular", "Schnelles Hosting", "3 Monate Support"]
+  },
+  {
+    tier: "★ Empfohlen",
+    name: "Studio Website",
+    price: "1.290",
+    suffix: "EUR",
+    sub: "einmalig · ~0EUR/Monat Hosting",
+    features: ["Alle Unterseiten", "Automatisches Galerie-System", "Unbegrenzte Kategorien", "Animationen & Custom Design", "SEO Setup", "6 Monate Support"],
+    featured: true
+  },
+  {
+    tier: "Premium",
+    name: "Individuell",
+    price: "Ab 2.000",
+    suffix: "EUR",
+    sub: "nach Aufwand",
+    features: ["Buchungssystem", "Gutschein-Shop", "Blog & Neuigkeiten", "12 Monate Support"]
+  }
+];
+---
+
+<section class="border-t border-blk/10 bg-blk py-32" id="preise" data-dark>
+  <div class="rv mx-auto max-w-7xl px-10">
+    <div class="mb-5 flex items-center gap-3 font-display text-[.56rem] font-bold uppercase tracking-[.28em] text-w/30 before:h-[2px] before:w-6 before:bg-acid before:content-['']">Preise</div>
+    <h2 class="font-display text-[clamp(2rem,4vw,3.8rem)] font-extrabold uppercase tracking-[-.03em] leading-[.93] text-w">
+      Transparent.<br /><em class="mt-0 block font-italic text-[.82em] font-normal normal-case text-acid">Keine Ueberraschungen.</em>
+    </h2>
+    <p class="mb-16 mt-2 max-w-[500px] text-[.88rem] font-light text-w/40">Einmalige Investition in deine Website. Keine versteckten Gebuehren, keine Abokosten die sich summieren.</p>
+    <table class="w-full border-collapse">
+      <thead>
+        <tr>
+          <th class="border-b border-w/10 py-3 pl-0 pr-6 text-left font-display text-[.5rem] font-bold uppercase tracking-[.22em] text-w/20">Paket</th>
+          <th class="border-b border-w/10 py-3 px-6 text-left font-display text-[.5rem] font-bold uppercase tracking-[.22em] text-w/20">Investition</th>
+          <th class="border-b border-w/10 py-3 px-6 text-left font-display text-[.5rem] font-bold uppercase tracking-[.22em] text-w/20">Leistungen</th>
+          <th class="border-b border-w/10 py-3 px-6 text-left font-display text-[.5rem] font-bold uppercase tracking-[.22em] text-w/20"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {plans.map((plan, index) => (
+          <tr class:list={["group border-b border-w/10 transition hover:bg-w/[.02] rv", index === 0 ? "d1" : index === 1 ? "d2" : "d3", plan.featured && "bg-acid/[.03]"]}>
+            <td class="py-6 pl-0 pr-6 align-top">
+              <span class="mb-1 block font-display text-[.5rem] font-bold uppercase tracking-[.2em] text-acid">{plan.tier}</span>
+              <span class="font-display text-[1.2rem] font-extrabold uppercase tracking-[-.01em] text-w">{plan.name}</span>
+            </td>
+            <td class="px-6 py-6 align-top">
+              <div class="whitespace-nowrap font-display text-[1.8rem] font-extrabold tracking-[-.03em] text-w">
+                {plan.price} <span class="text-[.55em] font-light text-w/30">{plan.suffix}</span>
+              </div>
+              <div class="mt-1 font-display text-[.68rem] tracking-[.06em] text-w/20">{plan.sub}</div>
+            </td>
+            <td class="px-6 py-6 align-top">
+              <ul class="list-none">
+                {plan.features.map((feature) => <li class="flex items-start gap-2 py-0.5 text-[.8rem] font-light text-w/45 before:mt-0.5 before:text-[.7rem] before:font-bold before:text-acid before:content-['✓']">{feature}</li>)}
+              </ul>
+            </td>
+            <td class="px-6 py-6 align-middle">
+              <a href="#kontakt" class:list={["inline-block whitespace-nowrap border px-5 py-3 font-display text-[.55rem] font-bold uppercase tracking-[.2em] transition", plan.featured ? "border-acid bg-acid text-blk hover:bg-acid2" : "border-w/20 text-w/40 hover:border-acid hover:bg-acid hover:text-blk"]}>Anfragen →</a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  delay?: string;
+  glow?: string;
+}
+
+const { title, description, delay = "", glow = "radial-gradient(circle,#3a5aff,transparent)" } = Astro.props;
+---
+
+<div class={`group relative flex min-h-[420px] cursor-none flex-col overflow-hidden rounded-2xl bg-blk transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1 rv ${delay}`}>
+  <div class="pointer-events-none absolute inset-0 z-[1] [background-image:radial-gradient(circle,rgba(255,255,255,.12)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_90%_90%_at_50%_50%,#000_30%,transparent_100%)]"></div>
+  <div class="pointer-events-none absolute -top-[60px] left-1/2 z-[2] h-[280px] w-[280px] -translate-x-1/2 rounded-full opacity-[.55] blur-[50px]" style={`background:${glow}`}></div>
+  <div class="relative z-[3] flex flex-1 items-center justify-center px-8 pb-4 pt-10">
+    <slot name="visual" />
+  </div>
+  <div class="relative z-[3] border-t border-white/5 px-8 pb-8 pt-6">
+    <div class="mb-2 font-display text-base font-bold uppercase tracking-[-0.01em] text-w/90">{title}</div>
+    <p class="text-[.82rem] font-light leading-[1.7] text-w/40">{description}</p>
+  </div>
+</div>

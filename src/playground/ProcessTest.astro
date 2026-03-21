@@ -1,0 +1,59 @@
+---
+
+import ProcessSteps from "../components/ProcessSteps.astro";
+const steps = [
+  {
+    number: "01",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+             <path d="M12 20h9"/>
+             <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+           </svg>`,
+    title: "Client Onboarding & Design",
+    description:
+      "Book a discovery call to discuss your vision and see if we're a perfect match. " +
+      "Afterwards, you'll receive a detailed proposal outlining the scope of work, " +
+      "deliverables, timeline, and pricing.",
+    image: "/fotoschwab.jpg",
+    imageAlt: "Figma design file showing the client's website mockup",
+  },
+  {
+    number: "02",
+      active: true,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+             <polyline points="16 18 22 12 16 6"/>
+             <polyline points="8 6 2 12 8 18"/>
+           </svg>`,
+    title: "Development And Feedback",
+    description:
+      "Once we agree on the scope and you accept the proposal, the website build begins. " +
+      "Using <a href='https://markup.io' target='_blank' rel='noopener'>markup.io</a>, " +
+      "you can provide feedback easily, ensuring a seamless and collaborative process " +
+      "from start to finish.",
+    image: "/fotoschwab.jpg",
+    imageAlt: "Squarespace editor with a woodworking studio demo site",
+  },
+  {
+    number: "03",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+             <rect x="2" y="7" width="20" height="15" rx="2" ry="2"/>
+             <polyline points="17 2 12 7 7 2"/>
+           </svg>`,
+    title: "Handover Training",
+    description:
+      "Upon your approval of the finished website, you'll receive bespoke handover training " +
+      "via a recorded Loom link. Plus, enjoy 30 days of free email support to help you " +
+      "transition smoothly.",
+    image: "/fotoschwab.jpg",
+    imageAlt: "Loom recording of the handover training session",
+  },
+];
+---
+
+    <ProcessSteps
+      badge="Smooth & efficient process"
+      heading={"An Example Squarespace\nWeb Design Project"}
+      steps={steps}
+    />

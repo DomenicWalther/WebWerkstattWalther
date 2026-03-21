@@ -1,9 +1,14 @@
 ---
 
+interface Props {
+    index: string | number;
+    label: string;
+    description: string;
+}
 const {index, label, description} = Astro.props;
 ---
-<div class="pt-5 pb-5 border-t border-black/[.07] grid grid-cols-[32px_1fr] gap-4 items-start">
-    <div class="font-display text-[0.5rem] font-bold tracking-[.15em] text-acid bg-blk w-6.5 h-6.5 flex items-center justify-center mt-0.5 shrink-0">
+<div class="pt-5 pb-5 border-t border-blk/10 grid grid-cols-[32px_1fr] gap-4 items-start box-border">
+    <div class="font-display text-[0.5rem] font-bold tracking-[.15em] text-acid bg-blk w-6 h-6 flex items-center justify-center mt-0.5 shrink-0">
         { index}
     </div>
     <div>

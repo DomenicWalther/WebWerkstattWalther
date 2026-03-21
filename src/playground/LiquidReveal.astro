@@ -1,0 +1,155 @@
+---
+interface Props {
+  baseImage: string;
+  revealImage: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+}
+
+const { baseImage, revealImage, alt = "Portrait", width = 400, height = 400 } = Astro.props;
+const id = `lr-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<div class="lr-wrapper" id={id} style={`width:${width}px;height:${height}px;position:relative;overflow:hidden;cursor:crosshair;display:block;`}>
+  <!-- Base image sits underneath -->
+  <img
+    class="lr-base"
+    src={baseImage}
+    alt={alt}
+    draggable="false"
+    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;"
+  />
+  <!-- Canvas draws the reveal image clipped to liquid blobs -->
+  <canvas
+    class="lr-canvas"
+    width={width}
+    height={height}
+    style="position:absolute;inset:0;width:100%;height:100%;display:block;"
+    data-reveal={revealImage}
+  ></canvas>
+</div>
+
+<script is:inline define:vars={{ id, width, height }}>
+(function () {
+  function init() {
+    const wrapper = document.getElementById(id);
+    if (!wrapper) { console.warn('LiquidReveal: no wrapper found for', id); return; }
+
+    const canvas = wrapper.querySelector('.lr-canvas');
+    if (!canvas) { console.warn('LiquidReveal: no canvas found'); return; }
+
+    const ctx = canvas.getContext('2d');
+    const W = width;
+    const H = height;
+
+    // Load the reveal image
+    const revealSrc = canvas.getAttribute('data-reveal');
+    const revealImg = new Image();
+    revealImg.src = revealSrc;
+
+    let mx = W / 2, my = H / 2; // smoothed position
+    let tx = W / 2, ty = H / 2; // target position
+    let hovering = false;
+    let revealLoaded = false;
+
+    revealImg.onload = () => { revealLoaded = true; };
+
+    // Blob trail
+    const blobs = [];
+    function spawnBlob(x, y) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 1.2 + 0.3;
+      blobs.push({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        r: Math.random() * 55 + 40,
+        life: 0,
+        maxLife: Math.random() * 70 + 40,
+      });
+      if (blobs.length > 25) blobs.shift();
+    }
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    let globalAlpha = 0;
+
+    function tick() {
+      // Smooth mouse follow
+      mx = lerp(mx, tx, 0.12);
+      my = lerp(my, ty, 0.12);
+
+      // Fade in/out
+      globalAlpha = lerp(globalAlpha, hovering ? 1 : 0, hovering ? 0.08 : 0.05);
+
+      // Spawn blobs while hovering
+      if (hovering && Math.random() < 0.45) {
+        spawnBlob(
+          mx + (Math.random() - 0.5) * 60,
+          my + (Math.random() - 0.5) * 60
+        );
+      }
+
+      // Age blobs
+      for (let i = blobs.length - 1; i >= 0; i--) {
+        const b = blobs[i];
+        b.x += b.vx;
+        b.y += b.vy;
+        b.vx *= 0.96;
+        b.vy *= 0.96;
+        b.life++;
+        if (b.life > b.maxLife) blobs.splice(i, 1);
+      }
+
+      // --- DRAW ---
+      ctx.clearRect(0, 0, W, H);
+
+      if (!revealLoaded || globalAlpha < 0.01) {
+        requestAnimationFrame(tick);
+        return;
+      }
+
+      ctx.save();
+      ctx.globalAlpha = globalAlpha;
+
+      // Build a clipping path from all blobs + main cursor circle
+      ctx.beginPath();
+
+      // Main cursor circle
+      ctx.arc(mx, my, 95, 0, Math.PI * 2);
+
+      // Trail blobs
+      for (const b of blobs) {
+        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+      }
+
+      ctx.clip();
+
+      // Draw the reveal image inside the clipped region
+      ctx.drawImage(revealImg, 0, 0, W, H);
+
+      ctx.restore();
+
+      requestAnimationFrame(tick);
+    }
+
+    // Events
+    wrapper.addEventListener('mouseenter', () => { hovering = true; });
+    wrapper.addEventListener('mouseleave', () => { hovering = false; });
+    wrapper.addEventListener('mousemove', (e) => {
+      const rect = wrapper.getBoundingClientRect();
+      tx = e.clientX - rect.left;
+      ty = e.clientY - rect.top;
+    });
+
+    tick();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>

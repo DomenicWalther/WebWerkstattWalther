@@ -1,0 +1,246 @@
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+  const cd = document.getElementById("cd");
+  const cr = document.getElementById("cr");
+  let mx = 0;
+  let my = 0;
+  let rx = 0;
+  let ry = 0;
+
+  document.addEventListener("mousemove", (e) => {
+    mx = e.clientX;
+    my = e.clientY;
+    cd.style.left = `${mx}px`;
+    cd.style.top = `${my}px`;
+  });
+
+  (function loop() {
+    rx += (mx - rx) * 0.1;
+    ry += (my - ry) * 0.1;
+    cr.style.left = `${rx}px`;
+    cr.style.top = `${ry}px`;
+    requestAnimationFrame(loop);
+  })();
+
+  document.addEventListener("mousemove", () => {
+    const elements = document.elementsFromPoint(mx, my);
+    document.body.classList.toggle("on-dark", elements.some((el) => el.closest("[data-dark]")));
+  });
+
+  document.querySelectorAll("p,h1,h2,h3,li,td").forEach((el) => {
+    el.addEventListener("mouseenter", () => document.body.classList.add("ch"));
+    el.addEventListener("mouseleave", () => document.body.classList.remove("ch"));
+  });
+
+  document.querySelectorAll("a,button,[data-accord] .accord-head").forEach((el) => {
+    el.addEventListener("mouseenter", () => {
+      document.body.classList.remove("ch");
+      document.body.classList.add("cl");
+    });
+    el.addEventListener("mouseleave", () => document.body.classList.remove("cl"));
+  });
+
+  let lenis = null;
+  if (typeof Lenis !== "undefined") {
+    lenis = new Lenis({
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true
+    });
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute("href"));
+        if (target) lenis.scrollTo(target, { offset: -80, duration: 1.4 });
+      });
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    () => document.getElementById("nav")?.classList.toggle("sc", window.scrollY > 60),
+    { passive: true }
+  );
+
+  document.querySelectorAll("[data-accord]").forEach((item) => {
+    item.querySelector(".accord-head")?.addEventListener("click", () => {
+      const isOpen = item.classList.contains("open");
+      document.querySelectorAll("[data-accord].open").forEach((openItem) => {
+        openItem.classList.remove("open");
+        const body = openItem.querySelector(".accord-body");
+        if (body) body.style.height = "0px";
+      });
+      if (!isOpen) {
+        item.classList.add("open");
+        const body = item.querySelector(".accord-body");
+        const inner = item.querySelector(".accord-inner");
+        if (body && inner) body.style.height = `${inner.offsetHeight}px`;
+      }
+    });
+  });
+
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("on");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.07 }
+  );
+  document.querySelectorAll(".rv").forEach((el) => revealObserver.observe(el));
+
+  function countUp(el, target) {
+    let start = null;
+    (function step(ts) {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / 1200, 1);
+      el.textContent = Math.round((1 - Math.pow(1 - progress, 3)) * target);
+      if (progress < 1) requestAnimationFrame(step);
+    })(performance.now());
+  }
+
+  const countObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          countUp(entry.target, Number.parseInt(entry.target.dataset.count, 10));
+          countObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+  document.querySelectorAll("[data-count]").forEach((el) => countObserver.observe(el));
+
+  function initProcessAnimation() {
+    const processSection = document.querySelector("[data-process-wrap]");
+    const processStage = document.querySelector("[data-process-stage]");
+    const cards = Array.from(document.querySelectorAll("[data-process-card]"));
+    if (!processSection || !processStage || cards.length < 2) return;
+
+    const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+    let progress = 0;
+    let targetProgress = 0;
+    let isLocked = false;
+    let isAnimating = false;
+    let touchY = 0;
+
+    const setAnimating = (value) => {
+      isAnimating = value;
+      cards.forEach(card => {
+        if (value) {
+          card.classList.add("is-animating");
+        } else {
+          card.classList.remove("is-animating");
+        }
+      });
+    };
+
+    const applyProgress = (raw, skipTransition = false) => {
+      const p = clamp(raw, 0, 1);
+
+      const t1 = clamp(p / 0.58, 0, 1);
+      const t2 = clamp((p - 0.18) / 0.72, 0, 1);
+
+      cards[0].style.opacity = `${1 - t1}`;
+      cards[0].style.transform = `translate3d(0, ${-220 * t1}px, 0) scale(${1 + 0.55 * t1}) rotate(${8 * t1}deg)`;
+      cards[0].style.filter = `blur(${4.2 * t1}px)`;
+
+      cards[1].style.opacity = `${t2}`;
+      cards[1].style.transform = `translate3d(0, ${240 * (1 - t2)}px, 0) scale(${0.72 + 0.28 * t2})`;
+      cards[1].style.filter = `blur(${4.6 * (1 - t2)}px)`;
+
+      processStage.style.transform = `scale(${1 + 0.11 * p})`;
+    };
+
+    const canEngage = () => {
+      const rect = processSection.getBoundingClientRect();
+      return rect.top <= 110 && rect.bottom >= window.innerHeight * 0.75;
+    };
+
+    const lock = () => {
+      if (isLocked) return;
+      isLocked = true;
+      if (lenis) lenis.stop();
+      document.body.style.overscrollBehavior = "none";
+    };
+
+    const unlock = () => {
+      if (!isLocked) return;
+      isLocked = false;
+      setAnimating(false);
+      if (lenis) lenis.start();
+      document.body.style.overscrollBehavior = "";
+    };
+
+    const goToTarget = (target) => {
+      if (progress === target) return;
+      targetProgress = target;
+      setAnimating(true);
+      setTimeout(() => {
+        progress = target;
+        applyProgress(progress);
+        setAnimating(false);
+        unlock();
+      }, 800);
+      applyProgress(target);
+    };
+
+    const onWheel = (event) => {
+      if (!canEngage() && !isLocked) return;
+
+      if (!isLocked && canEngage()) {
+        const direction = event.deltaY > 0 ? 1 : -1;
+        if ((direction > 0 && progress < 1) || (direction < 0 && progress > 0)) {
+          if (lenis) lenis.scrollTo(processSection, { offset: 0, duration: 0.35 });
+          lock();
+          goToTarget(direction > 0 ? 1 : 0);
+          return;
+        }
+      }
+
+      if (!isLocked) return;
+      event.preventDefault();
+    };
+
+    const onTouchStart = (event) => {
+      touchY = event.touches[0]?.clientY ?? 0;
+    };
+
+    const onTouchMove = (event) => {
+      const nextY = event.touches[0]?.clientY ?? touchY;
+      const delta = touchY - nextY;
+      touchY = nextY;
+
+      if (!canEngage() && !isLocked) return;
+
+      if (!isLocked && canEngage()) {
+        const direction = delta > 0 ? 1 : -1;
+        if ((direction > 0 && progress < 1) || (direction < 0 && progress > 0)) {
+          if (lenis) lenis.scrollTo(processSection, { offset: 0, duration: 0.35 });
+          lock();
+          goToTarget(direction > 0 ? 1 : 0);
+          return;
+        }
+      }
+
+      if (!isLocked) return;
+      event.preventDefault();
+    };
+
+    applyProgress(0);
+    window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
+  }
+
+  initProcessAnimation();
+</script>

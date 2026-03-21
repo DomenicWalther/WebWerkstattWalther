@@ -1,0 +1,47 @@
+---
+const items = [
+  {
+    category: "Hochzeit · Portrait · Familie · Business",
+    name: "Foto-Studio Schwab",
+    description: "Vollstaendige Studio-Website mit automatisiertem Galerie-System fuer 14 Kategorien - fotoschwab.de",
+    className: "col-span-2 aspect-[16/7]",
+    gradient: "linear-gradient(135deg,#1a0f0f,#2d1515)"
+  },
+  {
+    category: "Luxury Wedding",
+    name: "BrautCloud",
+    description: "Elegante Hochzeits-Galerie mit Ivory-Goldtoenen",
+    className: "aspect-[16/10]",
+    gradient: "linear-gradient(135deg,#0f1a12,#152d1a)"
+  },
+  {
+    category: "Portrait & Business",
+    name: "Studio Maier",
+    description: "Minimalistisch - vollstaendiger Buchungsflow via Tally",
+    className: "aspect-[16/10]",
+    gradient: "linear-gradient(135deg,#0f0f1a,#15152d)"
+  }
+];
+---
+
+<section class="border-t border-blk/10 bg-blk2 py-32" id="portfolio" data-dark>
+  <div class="mx-auto max-w-7xl px-10">
+    <div class="rv mb-5 flex items-center gap-3 font-display text-[.56rem] font-bold uppercase tracking-[.28em] text-w/30 before:h-[2px] before:w-6 before:bg-acid before:content-['']">Referenzen</div>
+    <h2 class="rv d1 font-display text-[clamp(2rem,4vw,3.8rem)] font-extrabold uppercase tracking-[-.03em] leading-[.93] text-w">
+      Websites die ich<br /><em class="mt-0 block font-italic text-[.82em] font-normal normal-case text-w/40">gebaut habe</em>
+    </h2>
+    <div class="mt-16 grid grid-cols-1 gap-[3px] md:grid-cols-2">
+      {items.map((item, index) => (
+        <div class:list={["group rv relative cursor-none overflow-hidden bg-blk", index === 0 ? "d1" : index === 1 ? "d2" : "d3", item.className]} style={`background:${item.gradient}`}>
+          <div class="absolute inset-0 bg-[linear-gradient(to_top,rgba(17,17,16,.85)_0%,transparent_55%)] px-9 py-8">
+            <div class="absolute bottom-8">
+              <div class="mb-1.5 font-display text-[.52rem] font-bold uppercase tracking-[.22em] text-acid">{item.category}</div>
+              <div class="mb-1 font-display text-[1.3rem] font-extrabold uppercase tracking-[-.02em] text-w">{item.name}</div>
+              <div class="translate-y-1.5 text-[.78rem] font-light text-w/50 opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">{item.description}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

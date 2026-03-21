@@ -1,0 +1,111 @@
+
+---
+import BenefitCard from "./BenefitCard.astro";
+---
+
+<section class="border-t border-blk/10 bg-w2 py-32" id="benefits">
+  <div class="mx-auto max-w-7xl px-10">
+    <div class="rv mb-5 flex items-center gap-3 font-display text-[.56rem] font-bold uppercase tracking-[.28em] text-grey before:h-[2px] before:w-6 before:bg-acid before:content-['']">Was du davon hast</div>
+    <h2 class="rv d1 font-display text-[clamp(2rem,4vw,3.8rem)] font-extrabold uppercase tracking-[-.03em] leading-[.93] text-blk">
+      Was eine gute Website<br /><em class="mt-0 block font-italic text-[.82em] font-normal normal-case text-grey">wirklich verändert</em>
+    </h2>
+    <div class="mt-14 grid grid-cols-1 gap-4 lg:grid-cols-3">
+
+      <!-- Card 1: Erster Eindruck -->
+      <BenefitCard 
+        title="Erster Eindruck der überzeugt" 
+        description="Kunden entscheiden in Sekunden ob sie bleiben oder gehen. Deine Website muss sofort zeigen was du kannst."
+        delay="d1"
+        glow="radial-gradient(circle,#3a5aff,transparent)"
+      >
+        <div slot="visual" class="w-full max-w-[220px] overflow-hidden rounded-lg border border-white/10 bg-[#1a1916] shadow-[0_20px_60px_rgba(0,0,0,.5)]">
+          <div class="flex items-center gap-1.5 border-b border-white/5 bg-[#141311] px-3 py-2">
+            <div class="h-1.5 w-1.5 rounded-full bg-[#ff5f57]"></div><div class="h-1.5 w-1.5 rounded-full bg-[#ffbd2e]"></div><div class="h-1.5 w-1.5 rounded-full bg-[#28c840]"></div>
+            <div class="ml-1 flex h-3.5 flex-1 items-center rounded-[3px] bg-[#0e0d0c] px-2"><span class="font-body text-[.42rem] tracking-[.03em] text-white/25">fotostudio-muster.de</span></div>
+          </div>
+          <div class="p-3">
+            <div class="mb-2 flex h-[60px] w-full items-center justify-center rounded bg-[linear-gradient(135deg,rgba(58,90,255,.15),rgba(0,0,0,0))]"><span class="font-italic text-[.7rem] italic text-white/20">Dein bestes Bild</span></div>
+            <div class="mb-1 flex gap-0.5">
+              <span class="text-[.55rem] text-[#f5a623]">★</span><span class="text-[.55rem] text-[#f5a623]">★</span><span class="text-[.55rem] text-[#f5a623]">★</span><span class="text-[.55rem] text-[#f5a623]">★</span><span class="text-[.55rem] text-[#f5a623]">★</span>
+            </div>
+            <div class="flex flex-col gap-1">
+              <div class="h-1 w-4/5 rounded bg-white/10"></div>
+              <div class="h-1 w-3/5 rounded bg-white/10"></div>
+              <div class="h-1 w-[70%] rounded bg-white/10"></div>
+            </div>
+          </div>
+        </div>
+      </BenefitCard>
+
+      <!-- Card 2: Mehr Anfragen -->
+      <BenefitCard 
+        title="Mehr Anfragen, weniger Aufwand" 
+        description="Klares Kontaktformular, sichtbare Verfügbarkeit, direkte Buchungsmöglichkeit — das verdoppelt deine Anfragen."
+        delay="d2"
+        glow="radial-gradient(circle,#c8922a,transparent)"
+      >
+        <div slot="visual" class="flex w-full max-w-[220px] flex-col gap-1.5">
+          <div class="flex animate-[slidein_4s_0s_ease-in-out_infinite_alternate] items-center gap-3 rounded-lg border border-white/10 bg-[#1a1916] px-3 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,.3)]">
+            <div class="h-2 w-2 shrink-0 rounded-full bg-[#4CAF50]"></div>
+            <div class="flex flex-col gap-0.5">
+              <div class="font-display text-[.5rem] font-semibold tracking-[.05em] text-w/70">Neue Anfrage — Hochzeit 2025</div>
+              <div class="font-body text-[.44rem] text-w/30">Über das Kontaktformular · gerade eben</div>
+            </div>
+          </div>
+          <div class="flex animate-[slidein_4s_.4s_ease-in-out_infinite_alternate] items-center gap-3 rounded-lg border border-white/10 bg-[#1a1916] px-3 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,.3)]">
+            <div class="h-2 w-2 shrink-0 rounded-full bg-[#3a5aff]"></div>
+            <div class="flex flex-col gap-0.5">
+              <div class="font-display text-[.5rem] font-semibold tracking-[.05em] text-w/70">Termin — Familienshooting</div>
+              <div class="font-body text-[.44rem] text-w/30">via Tally · vor 2 Stunden</div>
+            </div>
+          </div>
+          <div class="flex animate-[slidein_4s_.8s_ease-in-out_infinite_alternate] items-center gap-3 rounded-lg border border-white/10 bg-[#1a1916] px-3 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,.3)]">
+            <div class="h-2 w-2 shrink-0 rounded-full bg-acid"></div>
+            <div class="flex flex-col gap-0.5">
+              <div class="font-display text-[.5rem] font-semibold tracking-[.05em] text-w/70">Gutschein-Anfrage eingegangen</div>
+              <div class="font-body text-[.44rem] text-w/30">Über die Website · heute</div>
+            </div>
+          </div>
+        </div>
+      </BenefitCard>
+
+      <!-- Card 3: Galerie -->
+      <BenefitCard 
+        title="Galerie die sich selbst aufbaut" 
+        description="Neue Kategorie? Einfach eine Datei anlegen — die Seite entsteht automatisch. Keine Entwicklerkosten für jede Änderung."
+        delay="d3"
+        glow="radial-gradient(circle,#2a8a5a,transparent)"
+      >
+        <div slot="visual" class="w-full max-w-[220px]">
+          <div class="rounded-lg border border-white/10 bg-[#1a1916] px-3.5 py-3 shadow-[0_4px_20px_rgba(0,0,0,.3)]">
+            <div class="mb-2.5 flex items-center gap-2">
+              <span class="text-[.7rem]">📁</span>
+              <span class="font-display text-[.52rem] font-bold uppercase tracking-[.1em] text-w/50">Galerie / Kategorien</span>
+            </div>
+            <div class="flex items-center gap-2 border-t border-white/5 py-1.5">
+              <span class="text-[.6rem] opacity-50">📄</span>
+              <span class="font-body text-[.48rem] tracking-[.03em] text-w/35">hochzeit.md</span>
+              <span class="ml-auto bg-acid/15 px-1.5 py-0.5 font-display text-[.4rem] font-bold uppercase tracking-[.12em] text-acid">48 Bilder</span>
+            </div>
+            <div class="flex items-center gap-2 border-t border-white/5 py-1.5">
+              <span class="text-[.6rem] opacity-50">📄</span>
+              <span class="font-body text-[.48rem] tracking-[.03em] text-w/35">familie.md</span>
+              <span class="ml-auto bg-acid/15 px-1.5 py-0.5 font-display text-[.4rem] font-bold uppercase tracking-[.12em] text-acid">31 Bilder</span>
+            </div>
+            <div class="flex items-center gap-2 border-t border-white/5 py-1.5">
+              <span class="text-[.6rem] opacity-50">📄</span>
+              <span class="font-body text-[.48rem] tracking-[.03em] text-w/35">portrait.md</span>
+              <span class="ml-auto bg-acid/15 px-1.5 py-0.5 font-display text-[.4rem] font-bold uppercase tracking-[.12em] text-acid">22 Bilder</span>
+            </div>
+            <div class="flex items-center gap-2 border-t border-white/5 py-1.5">
+              <span class="text-[.6rem] opacity-50">✨</span>
+              <span class="font-body text-[.48rem] tracking-[.03em] text-w/35">iris.md</span>
+              <span class="ml-auto bg-acid/20 px-1.5 py-0.5 font-display text-[.4rem] font-bold uppercase tracking-[.12em] text-acid">Neu</span>
+            </div>
+          </div>
+        </div>
+      </BenefitCard>
+
+    </div>
+  </div>
+</section>

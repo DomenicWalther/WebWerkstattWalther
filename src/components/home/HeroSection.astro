@@ -1,0 +1,67 @@
+---
+const tiles = [
+  { category: "Hochzeit", name: "Mueller & Co.", gradient: "linear-gradient(145deg,#1e1612,#0e0c0a)", span2: true, label: "Hochzeit" },
+  { category: "Portrait", name: "Anna K.", gradient: "linear-gradient(145deg,#0e1218,#080c10)" },
+  { category: "Familie", name: "Scherer", gradient: "linear-gradient(145deg,#181210,#100c08)" },
+  { category: "Business", name: "Maier", gradient: "linear-gradient(145deg,#12100e,#0a0808)" },
+  { category: "Baby & Newborn", name: "Lichtblick", gradient: "linear-gradient(145deg,#101418,#080a0e)", span2: true },
+  { category: "Events", name: "Koenig", gradient: "linear-gradient(145deg,#161210,#0c0a08)" },
+  { category: "Akt", name: "Studio W.", gradient: "linear-gradient(145deg,#181614,#100e0c)" },
+  { category: "Kommunion", name: "Vogel", gradient: "linear-gradient(145deg,#0c1016,#080c10)" },
+  { category: "Babybauch", name: "Herzmomente", gradient: "linear-gradient(145deg,#14100e,#0c0808)", span2: true },
+  { category: "Tiere", name: "Paw Studio", gradient: "linear-gradient(145deg,#161814,#0e100c)" },
+  { category: "Schulanfang", name: "Erster Tag", gradient: "linear-gradient(145deg,#181210,#100c08)" },
+  { category: "Iris", name: "EyeArt", gradient: "linear-gradient(145deg,#0e1214,#08090c)" }
+];
+---
+
+<section class="grid min-h-svh overflow-hidden pt-20 lg:grid-cols-2">
+  <div class="relative z-[1] flex flex-col justify-center border-r border-blk/10 px-10 py-16 lg:pr-12">
+    <div class="mb-7 flex items-center gap-3 font-display text-[.58rem] font-bold uppercase tracking-[.28em] text-grey opacity-0 before:h-[2px] before:w-7 before:bg-acid before:content-[''] animate-[ain_.5s_.15s_forwards]">
+      Websites fuer Fotografen
+    </div>
+    <h1 class="max-w-[calc(100vw-5rem)] font-display text-[clamp(2.8rem,9.5vw,4.8rem)] font-extrabold uppercase tracking-[-.02em] leading-[.92] text-blk lg:max-w-[10.5ch] lg:text-[clamp(2.4rem,4.8vw,4.6rem)] lg:tracking-[-.03em] lg:leading-[.95]">
+      <span class="block">Mehr</span>
+      <span class="block">Anfragen.</span>
+      <span class="block">Mehr</span>
+      <span class="block"><em class="mt-0.5 block font-italic text-[.78em] font-normal normal-case tracking-[-.01em]">Wirkung.</em></span>
+    </h1>
+    <p class="mt-7 max-w-[420px] text-[.95rem] font-light leading-[1.8] text-grey opacity-0 animate-[ain_.7s_.9s_forwards]">
+      Deine Arbeit verdient eine Website die Kunden begeistert - bevor sie ueberhaupt anrufen. Ich baue sie, du machst weiter was du am besten kannst.
+    </p>
+    <div class="mt-9 flex flex-wrap items-center gap-5 opacity-0 animate-[ain_.7s_1.05s_forwards]">
+      <a href="#kontakt" class="inline-block cursor-none bg-blk px-8 py-3 font-display text-[.6rem] font-bold uppercase tracking-[.2em] text-acid transition hover:-translate-y-0.5 hover:bg-blk2">Jetzt anfragen</a>
+      <a href="#portfolio" class="group inline-flex cursor-none items-center gap-2.5 border-b border-blk/20 pb-0.5 font-display text-[.6rem] font-semibold uppercase tracking-[.2em] text-blk transition hover:border-blk">Referenzen ansehen <span class="transition group-hover:translate-x-1">→</span></a>
+    </div>
+    <div class="absolute bottom-10 left-10 right-12 flex items-end gap-12 opacity-0 animate-[ain_.6s_1.3s_forwards]">
+      <div><span class="block font-display text-2xl font-extrabold tracking-[-.02em] text-blk" data-count="100">0</span><span class="mt-0.5 block text-[.56rem] uppercase tracking-[.12em] text-grey">PageSpeed Score</span></div>
+      <div><span class="block font-display text-2xl font-extrabold tracking-[-.02em] text-blk">2-4 Wo.</span><span class="mt-0.5 block text-[.56rem] uppercase tracking-[.12em] text-grey">Bis zum Launch</span></div>
+      <div><span class="block font-display text-2xl font-extrabold tracking-[-.02em] text-blk">∞</span><span class="mt-0.5 block text-[.56rem] uppercase tracking-[.12em] text-grey">Galerie-Kategorien</span></div>
+    </div>
+  </div>
+  <div class="relative overflow-hidden bg-blk" data-dark>
+    <div class="absolute -inset-[60px]">
+      <div class="grid h-full w-full grid-cols-3 grid-rows-[repeat(5,200px)] gap-1 animate-[drift_14s_ease-in-out_infinite_alternate]">
+        {tiles.map((tile) => (
+          <div
+            class:list={[
+              "group relative overflow-hidden bg-blk2 after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(ellipse_at_35%_35%,rgba(255,255,255,.04)_0%,transparent_65%)]",
+              tile.span2 && "row-span-2"
+            ]}
+            style={`background:${tile.gradient}`}
+          >
+            <div class="absolute inset-0 flex flex-col items-center justify-center gap-1.5">
+              <span class="font-display text-[.52rem] font-bold uppercase tracking-[.22em] text-w/20">{tile.category}</span>
+              <span class="text-center font-italic text-[1.4rem] font-normal italic text-w/10">{tile.name}</span>
+            </div>
+            {tile.label && (
+              <div class="absolute bottom-3 left-3 bg-blk/60 px-2 py-1 font-display text-[.45rem] font-bold uppercase tracking-[.2em] text-transparent backdrop-blur transition group-hover:text-w/70">
+                {tile.label}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
